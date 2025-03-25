@@ -50,3 +50,10 @@ export type DateFieldProps = Omit<ModalInputs, 'type'> & {
 export type InputFieldProps = ModalInputs
 
 export type ValidationSchema = { [key: string]: StringSchema }
+
+export type ContainerProps = {
+  loading: boolean
+  rows: Array<Data>
+  handleClickOpen: BodyProps['handleEditClick']
+  handleDelete: BodyProps['handleDelete']
+}

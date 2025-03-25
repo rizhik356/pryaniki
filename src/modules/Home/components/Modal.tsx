@@ -5,20 +5,13 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material'
-import { Data, ModalProps, ValidationSchema } from '../types/TableTypes.ts'
+import { Data, ModalProps } from '../types/TableTypes.ts'
 import modalInputs from '../sources/modalInputs.ts'
 import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
 import DateField from './DateField.tsx'
 import InputField from './InputField.tsx'
 import styles from '../scss/styles.module.scss'
-
-const validationSchema = Yup.object().shape(
-  modalInputs.reduce((acc, { valueKey }): ValidationSchema => {
-    acc[valueKey] = Yup.string().required('Это поле обязательно')
-    return acc
-  }, {} as ValidationSchema),
-)
+import modalValidationSchema from '../schemas/modalValidationSchema.ts'
 
 const Modal = ({ open, handleClose, currentRow, handleSave }: ModalProps) => {
   const onSubmit = (values: Data) => {
@@ -33,7 +26,7 @@ const Modal = ({ open, handleClose, currentRow, handleSave }: ModalProps) => {
       <DialogContent>
         <Formik
           initialValues={currentRow}
-          validationSchema={validationSchema}
+          validationSchema={modalValidationSchema}
           onSubmit={onSubmit}
         >
           {({ setFieldValue, values }) => (

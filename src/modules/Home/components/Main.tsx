@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react'
-import {
-  Table,
-  TableContainer,
-  Button,
-  CircularProgress,
-  Box,
-} from '@mui/material'
+import { Button } from '@mui/material'
 import initialData from '../sources/initialData.ts'
-import Head from './Head.tsx'
 import { Data } from '../types/TableTypes.ts'
-import Body from './Body.tsx'
-import Modal from './Modal.tsx'
 import getTableData from '../api/getTableData.ts'
 import { errorNotification } from '../../../shared/ui/tostify'
 import { ToastContainer } from 'react-toastify'
@@ -19,6 +10,8 @@ import removeRow from '../api/removeRow.ts'
 import rowDataFormatter from '../helpers/rowDataFormatter.ts'
 import addNewRow from '../api/addNewRow.ts'
 import editRow from '../api/editRow.ts'
+import TableContainer from './TableContainer.tsx'
+import Modal from './Modal.tsx'
 
 const Main = () => {
   const [rows, setRows] = useState<Array<Data>>([])
@@ -105,27 +98,12 @@ const Main = () => {
       <Button variant="outlined" onClick={() => handleClickOpen()}>
         Добавить запись
       </Button>
-      <TableContainer sx={{ height: 'calc(100% - 23.5px)' }}>
-        {loading ? (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            height="100%"
-          >
-            <CircularProgress />
-          </Box>
-        ) : (
-          <Table stickyHeader aria-label="sticky table">
-            <Head />
-            <Body
-              rows={rows}
-              handleEditClick={handleClickOpen}
-              handleDelete={handleDelete}
-            />
-          </Table>
-        )}
-      </TableContainer>
+      <TableContainer
+        loading={loading}
+        rows={rows}
+        handleClickOpen={handleClickOpen}
+        handleDelete={handleDelete}
+      />
       <Modal
         open={open}
         handleClose={handleClose}
