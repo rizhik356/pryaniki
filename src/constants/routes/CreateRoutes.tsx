@@ -32,6 +32,10 @@ const CreatePages = () => {
           }
           return newRoute
         })}
+        <Route
+          path="/pryaniki/"
+          element={<Navigate to={token ? viewRoutes.home : viewRoutes.auth} />}
+        />
         <Route path="*" element={<>nikogo net</>}></Route>
       </Routes>
     </BrowserRouter>
