@@ -5,7 +5,7 @@ const modalInputs: Array<ModalInputs> = [
     autoFocus: true,
     margin: 'dense',
     label: 'Дата подписи компании',
-    type: 'date',
+    type: 'datetime',
     valueKey: 'companySigDate',
   },
   {
@@ -41,7 +41,7 @@ const modalInputs: Array<ModalInputs> = [
   {
     margin: 'dense',
     label: 'Дата подписи сотрудника',
-    type: 'date',
+    type: 'datetime',
     valueKey: 'employeeSigDate',
   },
   {

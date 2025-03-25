@@ -1,4 +1,6 @@
 import { FormControlOwnProps } from '@mui/material'
+import { FormikErrors, FormikValues } from 'formik'
+import { StringSchema } from 'yup'
 
 export type Data = {
   id: string | null
@@ -23,7 +25,7 @@ export type ModalProps = {
   handleClose: () => void
   currentRow: Data
   setCurrentRow: (row: Data) => void
-  handleSave: () => void
+  handleSave: (data: Data) => void
 }
 
 export type ModalInputs = {
@@ -33,3 +35,18 @@ export type ModalInputs = {
   type: string
   valueKey: keyof Data
 }
+
+export type RowData = Omit<Data, 'id'>
+
+export type DateFieldProps = Omit<ModalInputs, 'type'> & {
+  value: string | null
+  setFieldValue: (
+    field: string,
+    value: string,
+    shouldValidate?: boolean,
+  ) => Promise<void | FormikErrors<FormikValues>>
+}
+
+export type InputFieldProps = ModalInputs
+
+export type ValidationSchema = { [key: string]: StringSchema }

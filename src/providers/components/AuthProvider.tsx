@@ -25,6 +25,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setAxiosInstanceId(null)
       navigate(viewRoutes.auth)
     }
+    setLoading(false)
     //  navigate(viewRoutes.auth)
   }, [token])
 
